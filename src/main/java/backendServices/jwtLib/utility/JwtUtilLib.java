@@ -4,12 +4,11 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 
 import java.security.Key;
-import java.util.Date;
 
-public class JwtUtil {
+public class JwtUtilLib {
     private final Key key;
 
-    public JwtUtil(String secret) {
+    public JwtUtilLib(String secret) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
     }
 

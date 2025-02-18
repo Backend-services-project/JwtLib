@@ -1,6 +1,6 @@
 package backendServices.jwtLib;
 
-import backendServices.jwtLib.utility.JwtUtil;
+import backendServices.jwtLib.utility.JwtUtilLib;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
@@ -14,10 +14,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class JwtFilter extends OncePerRequestFilter {
-    private final JwtUtil jwtUtil;
+    private final JwtUtilLib jwtUtil;
 
     public JwtFilter(String secret) {
-        this.jwtUtil = new JwtUtil(secret);
+        this.jwtUtil = new JwtUtilLib(secret);
     }
 
     @Override

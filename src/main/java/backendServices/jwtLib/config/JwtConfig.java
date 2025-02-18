@@ -1,7 +1,7 @@
 package backendServices.jwtLib.config;
 
 import backendServices.jwtLib.JwtFilter;
-import backendServices.jwtLib.utility.JwtUtil;
+import backendServices.jwtLib.utility.JwtUtilLib;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,9 +13,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class JwtConfig {
 
-    private final JwtUtil jwtUtil;
+    private final JwtUtilLib jwtUtil;
 
-    public JwtConfig(JwtUtil jwtUtil) {
+    public JwtConfig(JwtUtilLib jwtUtil) {
         this.jwtUtil = jwtUtil;
     }
 
