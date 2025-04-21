@@ -1,7 +1,9 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.4.2'
+	id 'org.springframework.boot' version '3.2.3'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'java-library'
+	id 'maven-publish'
 }
 
 group = 'Backend-services'
@@ -18,26 +20,44 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.projectlombok:lombok:1.18.30'
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework.boot:spring-boot-starter-security")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("com.auth0:java-jwt:4.4.0")
-	implementation("org.springframework.boot:spring-boot-starter-validation")
-	implementation("org.springframework.boot:spring-boot-starter-json")
 
-	runtimeOnly("org.postgresql:postgresql")
+	// Spring Security & JWT
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
-	compileOnly 'org.projectlombok:lombok:1.18.30'
+	// Lombok (for reducing boilerplate)
+	implementation 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 
-	annotationProcessor 'org.projectlombok:lombok:1.18.30'
+	// Spring Boot validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	// Database (JPA + PostgreSQL/MySQL)
+//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//	implementation 'org.postgresql:postgresql'  // If using PostgreSQL
+//	 implementation 'mysql:mysql-connector-java'  // Uncomment for MySQL
+
+	// H2 (Optional, for testing)
+//	runtimeOnly 'com.h2database:h2'
+
+	// Spring Security Testing
+	testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+			groupId = 'backendServices'  // Replace with your group ID
+			artifactId = 'jwtLib'  // Replace with your library name
+			version = '0.0.1-SNAPSHOT'
+		}
+	}
 }
